@@ -1,4 +1,4 @@
-var product = [{
+const product = [{
     id: 1,
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb7MoaPxZE_tsrn_5u2MgoxD5CLu4tATFdrg&usqp=CAU',
     name: 'Hoyt straros 40 SVX',
@@ -239,29 +239,28 @@ var product = [{
 }];
 
 $(document).ready(() => {
-    var html = '';
+    let BowCard = '';
     for (let i = 0; i < product.length; i++) {
-        html += `<div onclick="openProductDetail(${i})" class="product-items ${product[i].type}">
+        BowCard += `<div onclick="openProductDetail(${i})" class="product-items ${product[i].type}">
                     <img class="product-img" src="${product[i].img}" alt="">
                     <p style="font-size: 1.2vw;">${product[i].name}</p>
                     <p stlye="font-size: 1vw;">${ numberWithCommas(product[i].price) } THB</p>
                 </div>`;
     }
-    $("#productlist").html(html);
+    $("#productlist").html(BowCard);
 
 })
 
 function numberWithCommas(x) {
     x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
+    let pattern = /(-?\d+)(\d{3})/;
     while (pattern.test(x))
         x = x.replace(pattern, "$1,$2");
     return x;
 }
 
 function searchsomething(elem) {
-    // console.log('#'+elem.id)
-    var value = $('#'+elem.id).val()
+    let value = $('#'+elem.id).val()
     console.log(value)
 
     var html = '';
@@ -329,7 +328,7 @@ function addtocart() {
             img: product[productindex].img,
             count: 1
         };
-        // console.log(obj)
+        
         cart.push(obj)
     }
     console.log(cart)
@@ -414,3 +413,31 @@ function deinitems(action, index) {
         rendercart();
     }
 }
+
+function scrollFunction() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        document.getElementById("scroll-top-btn").style.display = "block";
+    } else {
+        document.getElementById("scroll-top-btn").style.display = "none";
+    }
+}
+
+window.onscroll = function() {
+    scrollFunction();
+};
+
+const scrollToTopBtn = document.getElementById('scroll-top-btn');
+
+scrollToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+function backToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+
